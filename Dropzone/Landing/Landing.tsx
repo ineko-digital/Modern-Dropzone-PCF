@@ -2006,6 +2006,13 @@ export class Landing extends Component<LandingProps, LandingState> {
 
     let enableSharePointDocumentLocationsControlParameter =
       getControlValue(context!, "enableSharePointDocumentLocationsControl") === true;
+
+    const base64 = previewFile?.documentbody.replace(
+      /^data:application\/pdf;base64,/i,
+      ""
+    );
+
+    const pdfDataUri = `data:application/pdf;base64,${base64}`;
     return (
       <>
         <Toaster position="top-right" reverseOrder={false} />
@@ -2055,19 +2062,21 @@ export class Landing extends Component<LandingProps, LandingState> {
                   })()
                 ) : (
                   <object
-                    data={`data:application/pdf;base64,${previewFile.documentbody}`}
+                    data={previewFile.documentbody.replace(
+                      /(data:application\/pdf;base64,).*?\1/,
+                      "$1"
+                    )}
                     type="application/pdf"
                     width="100%"
                     height="100%"
                   >
                     <p>
                       Your browser does not support PDFs.{" "}
-                      <a href={`data:application/pdf;base64,${previewFile.documentbody}`}>Download the PDF</a>.
+                      <a href={previewFile.documentbody}>Download the PDF</a>.
                     </p>
                   </object>
                 )
               )}
-
             </div>
 
             <DialogFooter
@@ -2177,7 +2186,7 @@ export class Landing extends Component<LandingProps, LandingState> {
                             <IconButton
                               iconProps={{ iconName: "Back" }}
                               title={`${getLocalString(this.props.context!, LocalStrings.Button.Label_Back)}`}
-                              ariaLabel="Go back"
+                              ariaLabel={`${getLocalString(this.props.context!, LocalStrings.Button.Label_Back)}`}
                               onClick={(event) => {
                                 event.preventDefault();
                                 event.stopPropagation();
@@ -2188,7 +2197,7 @@ export class Landing extends Component<LandingProps, LandingState> {
                         </div>
                         <div style={{ flexGrow: 1, textAlign: "center" }}>
                           {isEmpty ? (
-                            <p>Drag and drop files here or Browse for files</p>
+                            <p>{`${getLocalString(this.props.context!, LocalStrings.Input.Placeholder_Dropzone)}`}</p>
                           ) : (
                             this.renderFileList()
                           )}
