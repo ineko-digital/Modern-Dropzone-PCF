@@ -4,44 +4,17 @@ on:
   push:
     tags:
       - "v*"
-  workflow_dispatch:
-    inputs:
-      tag_name:
-        description: "Release tag (z. B. v1.2.3)"
-        required: true
-        type: string
 
 permissions:
-  contents: write # nötig zum Release/Asset publish
+  contents: write
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
 
-    env:
-      TAG_NAME: ${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.ref_name }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Ensure release tag exists
-        run: |
-          if [ -z "${TAG_NAME}" ]; then
-            echo "TAG_NAME is empty."
-            exit 1
-          fi
-
-          if ! git rev-parse "${TAG_NAME}" >/dev/null 2>&1; then
-            git tag "${TAG_NAME}" "${GITHUB_SHA}"
-          fi
-
-      - name: Install OS deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git zip unzip ca-certificates curl build-essential python3
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -53,14 +26,15 @@ jobs:
         run: |
           curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
           sudo bash /tmp/dotnet-install.sh --channel 10.0 --install-dir /usr/share/dotnet
-          echo "DOTNET_ROOT=/usr/share/dotnet" >> $GITHUB_ENV
-          echo "DOTNET_ROOT_X64=/usr/share/dotnet" >> $GITHUB_ENV
-          echo "PATH=/usr/share/dotnet:$HOME/.dotnet/tools:$PATH" >> $GITHUB_ENV
+          echo "DOTNET_ROOT=/usr/share/dotnet" >> "$GITHUB_ENV"
+          echo "DOTNET_ROOT_X64=/usr/share/dotnet" >> "$GITHUB_ENV"
+          echo "/usr/share/dotnet" >> "$GITHUB_PATH"
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
 
       - name: Install Power Platform CLI (pac)
         run: |
           dotnet tool install --global Microsoft.PowerApps.CLI.Tool || dotnet tool update --global Microsoft.PowerApps.CLI.Tool
-          pac help | head -n 8
+          pac --version
 
       - name: Build PCF
         run: |
@@ -74,13 +48,40 @@ jobs:
             --folder ./Solution/ModernDropzone/src \
             --zipfile ./out/ModernDropzone_managed.zip \
             --packagetype Managed
-          ls -la out
+
+      - name: Verify managed zip structure
+        run: |
+          python3 - <<'PY'
+          import sys
+          import zipfile
+
+          zip_path = "out/ModernDropzone_managed.zip"
+          required = {"solution.xml", "customizations.xml", "[Content_Types].xml"}
+
+          with zipfile.ZipFile(zip_path, "r") as zf:
+              root_entries = {
+                  name.rstrip("/")
+                  for name in zf.namelist()
+                  if name and "/" not in name.rstrip("/")
+              }
+
+          print("ZIP root entries:")
+          for entry in sorted(root_entries):
+              print(f" - {entry}")
+
+          missing = sorted(required - root_entries)
+          if missing:
+              print("Missing required root entries:", ", ".join(missing))
+              sys.exit(1)
+
+          print("All required root entries are present.")
+          PY
 
       - name: Create GitHub Release and upload asset
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.TAG_NAME }}
-          name: Release ${{ env.TAG_NAME }}
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
           generate_release_notes: true
           files: |
             out/ModernDropzone_managed.zip
