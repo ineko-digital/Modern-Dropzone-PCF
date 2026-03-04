@@ -10,7 +10,8 @@
     "rebuild": "pcf-scripts rebuild",
     "start": "pcf-scripts start",
     "start:watch": "pcf-scripts start watch",
-    "refreshTypes": "pcf-scripts refreshTypes"
+    "refreshTypes": "pcf-scripts refreshTypes",
+    "build:managed-solution": "bash ./scripts/build-managed-solution.sh"
   },
   "dependencies": {
     "@fluentui/react": "^8.29.0",
