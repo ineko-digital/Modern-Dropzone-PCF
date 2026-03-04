@@ -1,0 +1,48 @@
+name: Build managed Dynamics 365 solution
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  build-managed-solution:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build PCF control
+        run: npm run build
+
+      - name: Restore Dataverse solution project
+        run: dotnet restore Solution/ModernDropzone/ModernDropzone.cdsproj
+
+      - name: Build managed solution package
+        run: dotnet build Solution/ModernDropzone/ModernDropzone.cdsproj -c Release /p:SolutionPackageType=Managed
+
+      - name: Upload managed solution artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: managed-solution
+          path: |
+            Solution/ModernDropzone/bin/Release/*.zip
+          if-no-files-found: error

@@ -77,3 +77,40 @@ For any issues or suggestions, use the "Issues" tab at the top of the page.
 **A:** You can disable drops directly in the edit form menu. Edit the component and set the boolean values for `enableNoteDrops` or `enableSharePointDrops` to `False`. By default, both options are set to `True`, but you can turn them off as needed.
 
 ---
+
+## Building a managed Dynamics 365 solution package
+
+I validated the setup against Microsoft Learn guidance for ALM solution concepts, importing custom PCF controls, and the Power Platform CLI/solution tooling. The practical takeaway for this repository is:
+
+- Keep your PCF control in source control.
+- Keep the Dataverse solution as an unpacked solution project (`.cdsproj`) in source control.
+- Build the managed ZIP from the solution project with `SolutionPackageType=Managed`.
+
+This repository is now configured to do that both locally and in CI.
+
+### Local build
+
+Run:
+
+```bash
+npm run build:managed-solution
+```
+
+This script will:
+
+1. Install npm dependencies.
+2. Build the PCF control.
+3. Restore and build `Solution/ModernDropzone/ModernDropzone.cdsproj` as managed.
+4. Copy resulting managed ZIP file(s) to `artifacts/`.
+
+### GitHub Actions build
+
+A workflow is included at `.github/workflows/build-managed-solution.yml`.
+
+- It runs on pull requests, pushes to `main`/`master`, and manual dispatch.
+- It builds the PCF and then builds the Dataverse solution project as managed.
+- It publishes `Solution/ModernDropzone/bin/Release/*.zip` as the `managed-solution` artifact.
+
+### Why you currently only see three XML files in `src/Other`
+
+That is normal when the solution itself contains minimal classic Dataverse metadata and mostly references components (like your PCF control) through the solution project/reference pipeline. The managed solution ZIP is generated during build from the solution project + referenced PCF project, not by manually adding more XML files.
