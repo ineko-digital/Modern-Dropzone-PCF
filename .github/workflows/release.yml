@@ -1,0 +1,61 @@
+name: Build managed solution and publish GitHub Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write  # nötig zum Release/Asset publish
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install OS deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip ca-certificates curl build-essential python3
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install .NET 10
+        run: |
+          curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+          sudo bash /tmp/dotnet-install.sh --channel 10.0 --install-dir /usr/share/dotnet
+          echo "DOTNET_ROOT=/usr/share/dotnet" >> $GITHUB_ENV
+          echo "DOTNET_ROOT_X64=/usr/share/dotnet" >> $GITHUB_ENV
+          echo "PATH=/usr/share/dotnet:$HOME/.dotnet/tools:$PATH" >> $GITHUB_ENV
+
+      - name: Install Power Platform CLI (pac)
+        run: |
+          dotnet tool install --global Microsoft.PowerApps.CLI.Tool || dotnet tool update --global Microsoft.PowerApps.CLI.Tool
+          pac help | head -n 8
+
+      - name: Build PCF
+        run: |
+          npm ci
+          npm run build -- --buildMode production
+
+      - name: Pack managed solution
+        run: |
+          mkdir -p out
+          pac solution pack \
+            --folder ./Solution/ModernDropzone/src \
+            --zipfile ./out/ModernDropzone_managed.zip \
+            --packagetype Managed
+          ls -la out
+
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            out/ModernDropzone_managed.zip
