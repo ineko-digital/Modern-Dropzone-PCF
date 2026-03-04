@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns0="https://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:schemas-microsoft-com:xml-msdata">
+	<ns0:schema id="root">
+		<ns0:import namespace="https://www.w3.org/XML/1998/namespace" />
+		<ns0:element name="root" ns1:IsDataSet="true">
+			<ns0:complexType>
+				<ns0:choice maxOccurs="unbounded">
+					<ns0:element name="metadata">
+						<ns0:complexType>
+							<ns0:sequence>
+								<ns0:element name="value" type="xsd:string" minOccurs="0" />
+							</ns0:sequence>
+							<ns0:attribute name="name" use="required" type="xsd:string" />
+							<ns0:attribute name="type" type="xsd:string" />
+							<ns0:attribute name="mimetype" type="xsd:string" />
+							<ns0:attribute ref="xml:space" />
+						</ns0:complexType>
+					</ns0:element>
+					<ns0:element name="assembly">
+						<ns0:complexType>
+							<ns0:attribute name="alias" type="xsd:string" />
+							<ns0:attribute name="name" type="xsd:string" />
+						</ns0:complexType>
+					</ns0:element>
+					<ns0:element name="data">
+						<ns0:complexType>
+							<ns0:sequence>
+								<ns0:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+								<ns0:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+							</ns0:sequence>
+							<ns0:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+							<ns0:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+							<ns0:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+							<ns0:attribute ref="xml:space" />
+						</ns0:complexType>
+					</ns0:element>
+					<ns0:element name="resheader">
+						<ns0:complexType>
+							<ns0:sequence>
+								<ns0:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+							</ns0:sequence>
+							<ns0:attribute name="name" type="xsd:string" use="required" />
+						</ns0:complexType>
+					</ns0:element>
+				</ns0:choice>
+			</ns0:complexType>
+		</ns0:element>
+	</ns0:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="App__Name" xml:space="preserve">
+		<value>Modern Dropzone</value>
+	</data>
+	<data name="App__Description" xml:space="preserve">
+		<value>Modern Dropzone-Komponente für Dynamics 365 mit OOTB-Integration für Notizen und SharePoint</value>
+	</data>
+	<data name="Input__Placeholder_Search" xml:space="preserve">
+		<value>Dateien suchen...</value>
+	</data>
+	<data name="Input__Placeholder_Dropzone" xml:space="preserve">
+		<value>Dateien hierher ziehen und ablegen oder nach Dateien suchen</value>
+	</data>
+	<data name="Input__Placeholder_Record_Not_Created" xml:space="preserve">
+		<value>Dieser Datensatz wurde noch nicht erstellt. Erstellen Sie diesen Datensatz, um den Datei-Upload zu aktivieren.</value>
+	</data>
+	<data name="Button__Label_Preview" xml:space="preserve">
+		<value>Vorschau</value>
+	</data>
+	<data name="Button__Label_Rename" xml:space="preserve">
+		<value>Umbenennen</value>
+	</data>
+	<data name="Button__Label_Download" xml:space="preserve">
+		<value>Herunterladen</value>
+	</data>
+	<data name="Button__Label_Delete" xml:space="preserve">
+		<value>Löschen</value>
+	</data>
+	<data name="Button__Label_Remove" xml:space="preserve">
+		<value>Entfernen</value>
+	</data>
+	<data name="Button__Label_Remove_Folder" xml:space="preserve">
+		<value>Ordner entfernen</value>
+	</data>
+	<data name="Button__Label_Actions" xml:space="preserve">
+		<value>Aktionen</value>
+	</data>
+	<data name="Button__Label_CreateFolder" xml:space="preserve">
+		<value>Ordner erstellen</value>
+	</data>
+	<data name="Button__Label_Settings" xml:space="preserve">
+		<value>Einstellungen</value>
+	</data>
+	<data name="Button__Label_RememberLocation" xml:space="preserve">
+		<value>Speicherort merken?</value>
+	</data>
+	<data name="Button__Label_Back" xml:space="preserve">
+		<value>Zurück</value>
+	</data>
+	<data name="Dialog__Title_CreateFolder" xml:space="preserve">
+		<value>Neuen Ordner erstellen</value>
+	</data>
+	<data name="Dialog__Description_CreateFolder" xml:space="preserve">
+		<value>Geben Sie einen Namen für den neuen Ordner ein:</value>
+	</data>
+	<data name="Dialog__Input_Placeholder_CreateFolder" xml:space="preserve">
+		<value>Ordnername</value>
+	</data>
+	<data name="Dialog__Button_Create_CreateFolder" xml:space="preserve">
+		<value>Erstellen</value>
+	</data>
+	<data name="Dialog__Button_Cancel_CreateFolder" xml:space="preserve">
+		<value>Abbrechen</value>
+	</data>
+	<data name="Dialog__Button_Delete_Confirmation" xml:space="preserve">
+		<value>Möchten Sie diesen Ordner wirklich löschen</value>
+	</data>
+	<data name="Dialog__Title_Edit_File" xml:space="preserve">
+		<value>Dateinamen bearbeiten</value>
+	</data>
+	<data name="Dialog__Description_Edit_File" xml:space="preserve">
+		<value>Dateiname</value>
+	</data>
+	<data name="Dialog__Button_Save_Edit_File" xml:space="preserve">
+		<value>Speichern</value>
+	</data>
+	<data name="Dialog__Button_Cancel_Edit_File" xml:space="preserve">
+		<value>Abbrechen</value>
+	</data>
+	<data name="Dialog__Title_AddLocation" xml:space="preserve">
+		<value>Speicherort hinzufügen</value>
+	</data>
+	<data name="Dialog__Description_AddLocation" xml:space="preserve">
+		<value>Geben Sie einen Namen für den neuen Ordner ein</value>
+	</data>
+	<data name="Dialog__Input_Label_DisplayName_AddLocation" xml:space="preserve">
+		<value>Anzeigename</value>
+	</data>
+	<data name="Dialog__Input_Label_ParentSite_AddLocation" xml:space="preserve">
+		<value>Übergeordnete Website</value>
+	</data>
+	<data name="Dialog__Input_Label_FolderName_AddLocation" xml:space="preserve">
+		<value>Ordnername</value>
+	</data>
+	<data name="Dialog__Button_Save_AddLocation" xml:space="preserve">
+		<value>Speichern</value>
+	</data>
+	<data name="Dialog__Button_Cancel_AddLocation" xml:space="preserve">
+		<value>Abbrechen</value>
+	</data>
+	<data name="Dialog__Button_Yes" xml:space="preserve">
+		<value>Ja</value>
+	</data>
+	<data name="Dialog__Button_No" xml:space="preserve">
+		<value>Nein</value>
+	</data>
+	<data name="Toggle__Label_SharePointDocuments" xml:space="preserve">
+		<value>SharePoint-Dokumente</value>
+	</data>
+	<data name="Toggle__Value_On_SharePointDocuments" xml:space="preserve">
+		<value>Ein</value>
+	</data>
+	<data name="Toggle__Value_Off_SharePointDocuments" xml:space="preserve">
+		<value>Aus</value>
+	</data>
+	<data name="Toast__Message_Uploading_Notes" xml:space="preserve">
+		<value>Datei wird hochgeladen...</value>
+	</data>
+	<data name="Toast__Message_Upload_Success_Notes" xml:space="preserve">
+		<value>erfolgreich hochgeladen!</value>
+	</data>
+	<data name="Toast__Message_Upload_Error_Notes" xml:space="preserve">
+		<value>Fehler beim Hochladen der Datei</value>
+	</data>
+	<data name="Toast__Message_Read_Error_Notes" xml:space="preserve">
+		<value>Fehler beim Lesen der Datei</value>
+	</data>
+	<data name="Toast__Message_Uploading_SharePoint" xml:space="preserve">
+		<value>Wird in SharePoint hochgeladen...</value>
+	</data>
+	<data name="Toast__Message_Upload_Success_SharePoint" xml:space="preserve">
+		<value>erfolgreich hochgeladen!</value>
+	</data>
+	<data name="Toast__Message_Upload_Error_SharePoint" xml:space="preserve">
+		<value>Fehler beim Hochladen der Datei</value>
+	</data>
+	<data name="Toast__Message_Refresh_Error_SharePoint" xml:space="preserve">
+		<value>Die Dateiliste konnte nicht aktualisiert werden.</value>
+	</data>
+	<data name="Toast__Message_Read_Error_SharePoint" xml:space="preserve">
+		<value>Fehler beim Lesen der Datei</value>
+	</data>
+	<data name="Toast__Message_Download_Error_Notes" xml:space="preserve">
+		<value>Fehler beim Herunterladen der Datei</value>
+	</data>
+	<data name="Toast__Message_Download_Prepare_Error_Notes" xml:space="preserve">
+		<value>Datei konnte nicht zum Download vorbereitet werden.</value>
+	</data>
+	<data name="Toast__Message_Download_Error_SharePoint" xml:space="preserve">
+		<value>Fehler beim Herunterladen der Datei</value>
+	</data>
+	<data name="Toast__Message_Download_Open_Error_SharePoint" xml:space="preserve">
+		<value>Datei konnte nicht in einem neuen Tab geöffnet werden.</value>
+	</data>
+	<data name="Toast__Message_Delete_Error_File_Not_Found_SharePoint" xml:space="preserve">
+		<value>Datei nicht gefunden. Möglicherweise wurde sie bereits gelöscht oder verschoben.</value>
+	</data>
+	<data name="Toast__Message_Delete_Error_SharePoint" xml:space="preserve">
+		<value>SharePoint document successfully deleted!</value>
+	</data>
+	<data name="Toast__Message_Delete_Loading" xml:space="preserve">
+		<value>Datei wird gelöscht...</value>
+	</data>
+	<data name="Toast__Message_Delete_Success" xml:space="preserve">
+		<value>Datei erfolgreich gelöscht!</value>
+	</data>
+	<data name="Toast__Message_Delete_Failure" xml:space="preserve">
+		<value>Fehler beim Löschen der Datei</value>
+	</data>
+	<data name="Toast__Message_Save_Loading" xml:space="preserve">
+		<value>Dateiname wird gespeichert...</value>
+	</data>
+	<data name="Toast__Message_Save_Success" xml:space="preserve">
+		<value>Dateiname erfolgreich gespeichert!</value>
+	</data>
+	<data name="Toast__Message_Save_Error" xml:space="preserve">
+		<value>Fehler beim Speichern des Dateinamens</value>
+	</data>
+	<data name="Toast__Message_Create_Folder_Empty_Error" xml:space="preserve">
+		<value>Ordnername darf nicht leer sein.</value>
+	</data>
+	<data name="Toast__Message_Create_Folder_Loading" xml:space="preserve">
+		<value>Ordner wird erstellt...</value>
+	</data>
+	<data name="Toast__Message_Create_Folder_Success" xml:space="preserve">
+		<value>Ordner erfolgreich erstellt!</value>
+	</data>
+	<data name="Toast__Message_Create_Folder_Error" xml:space="preserve">
+		<value>Fehler beim Erstellen des Ordners</value>
+	</data>
+	<data name="Toast__Message_Create_Folder_Empty_Error" xml:space="preserve">
+		<value>Ordnername darf nicht leer sein.</value>
+	</data>
+</root>

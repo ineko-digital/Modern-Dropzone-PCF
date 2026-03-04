@@ -16,6 +16,7 @@
       <platform-library name="Fluent" version="8.29.0" />
       <css path="css/Dropzone.css" order="2" />
       <resx path="strings/Dropzone.1033.resx" version="1.0.0" />
+      <resx path="strings/Dropzone.1031.resx" version="1.0.0" />
       <resx path="strings/Dropzone.2057.resx" version="1.0.0" />
     </resources>
     <feature-usage>
